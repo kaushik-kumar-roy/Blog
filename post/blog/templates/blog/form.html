@@ -1,0 +1,17 @@
+{% extends 'base.html'%}
+
+{% block heading %} {{title}} {% endblock %}
+
+{% block content%}
+  <label>Blog Form</label>
+  <form method="POST" action="." enctype="multipart/form-data">
+  	{%csrf_token%}
+  	{{form.as_p}}
+  	<button type="submit">Submit</button>
+  </form>
+
+  <div>		
+	<h4><a href="/blog/">See all posts.</a></h4>
+  </div>
+{% endblock %}
+

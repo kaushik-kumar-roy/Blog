@@ -1,0 +1,15 @@
+{% extends 'base.html'%}
+
+{% block heading %} {{title}} {% endblock %}
+
+{% block content%}
+  <label>Form</label>
+  <form method="POST" action=".">
+  	{%csrf_token%}
+  	{{form.as_p}}
+  	<!-- <input type="text" name="full_name"/>
+  	<input type="email" name="email"/>
+  	<textarea name="content"></textarea>-->
+  	<button type="submit">Submit</button>
+  </form>
+{% endblock %}

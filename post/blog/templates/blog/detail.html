@@ -1,0 +1,24 @@
+{% extends 'base.html'%}
+
+{% block content %}
+	
+	{% if request.user.is_authenticated %}
+		{% if request.user.is_staff %}
+		<div>
+			<h4>
+				<a href="{{object.get_update_url}}">Edit</a> | 
+				<a href="{{object.get_delete_url}}">Delete</a>
+			</h4>
+		</div>
+		{% endif %}
+	{% endif %}
+	<div>
+		<h1>{{object.title}}</h1>
+		<p>{{object.content}}</p>
+	</div>
+
+	{% include 'blog/comment_form.html' %}
+
+	{% include 'blog/comment_list.html' with blog_comments=comments %}
+	
+{% endblock %}

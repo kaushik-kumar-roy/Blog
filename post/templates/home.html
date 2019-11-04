@@ -1,0 +1,14 @@
+{% extends 'base.html'%}
+
+{% block title%}
+  {{title}}
+{% endblock %}
+
+{% block heading%}
+  <span>Home page</span>
+{% endblock %}
+
+{% block content%}
+  <p>User: {{user}}</p>
+  <p>Authenticated {{user.is_authenticated}}</p>
+{% endblock %}

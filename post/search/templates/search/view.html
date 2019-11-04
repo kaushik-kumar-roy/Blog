@@ -1,0 +1,12 @@
+{% extends 'base.html'%}
+
+{% block content%}
+	<div class="search-results">
+		<div class="search-query">Your search for {{query}}...</div>
+		<div class="resuts">
+			{% for blog_item in results %}
+				{% include 'blog/list-item.html' with blog_post=blog_item %}
+			{% endfor %}
+		</div>
+	</div>
+{% endblock %}

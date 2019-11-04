@@ -1,0 +1,17 @@
+{% extends 'base.html'%}
+
+{% block title %}All Blog's{% endblock %}
+
+{% block content %}
+	
+	<div>		
+		<h4><a href="/blog/create/">create a new post.</a></h4>
+	</div>
+	<div>
+		<p>All posts</p>
+		{% for object in objects %}
+			{% include 'blog/list-item.html' with blog_post=object %}
+		{% endfor %}
+	</div>
+
+{% endblock %}
