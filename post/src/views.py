@@ -1,7 +1,11 @@
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.template.loader import get_template
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import (
+	authenticate, 
+	login, 
+	logout
+)
 
 from .forms import ContactForm
 
@@ -37,9 +41,18 @@ def example_page(request):
 """
 def accounts_login(request):
 
+	print(request.POST)
+	print(f"post data : {bool(request.POST)}")
+	
 	context = {"title":"Login page"}
+	# check if POST dict is empty
+	post_data = bool(request.POST)
 
-	if request.POST is None or request.POST["username"]=="" or request.POST["password"]=="":
+	if request.POST is None or post_data==False:
+		template_name = "login.html"
+		return render(request, template_name, context)
+
+	if request.POST["username"]=="" or request.POST["password"]=="":
 		context['message']= "We received empty values. Please provide the correct credentials"
 		template_name = "login.html"
 		return render(request, template_name, context)
@@ -54,30 +67,17 @@ def accounts_login(request):
 
 	if user is not None:
 		login(request, user)		
-		return redirect("", {"title": "Home page"})		
+		return redirect("/", {"title": "Home page"})		
 	else:
 		context['message']= "We didn't find any account with the provided credentials."
 		template_name = "login.html"
 		return render(request, template_name, context)
 
 def accounts_logout(request):
-	data = request.POST
-	print(data)
-	return render(request, "signup.html", {"title":"Login page"})
+	logout(request)
+	return redirect("/", {"title": "Home page"})
 
 def accounts_create(request):
 	data = request.POST
 	print(data)
 	return render(request, "signup.html", {"title":"Login page"})
-
-
-
-"""
-
-if request.POST is None:
-	return redirect('/settings/')
-
-if request.POST.get('email')=="" or request.POST.get('password')=="":
-	return redirect('/settings/')
-
-"""
